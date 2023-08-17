@@ -22,15 +22,25 @@ model Collection {
     articles Article[]
 }
 
+model Theme {
+    id       String   @id @default(cuid())
+    name     String
+    articles Article[]
+}
+
+
 model Article {
-    id           String   @id @default(cuid())
-    createdAt    DateTime @default(now())
+      id           String    @id @default(cuid())
+    createdAt    DateTime  @default(now())
     title        String   
     url          String
-    imageUrl     String? 
-    read         Boolean  @default(false)
-    userId       String   // ID utilisateur de Clerk
+    imageUrl     String?   // URL de l'image
+    read         Boolean   @default(false)
+    userId       String    // ID utilisateur de Clerk
     collectionId String
     collection   Collection @relation(fields: [collectionId], references: [id])
+    themeId      String?
+    theme        Theme?     @relation(fields: [themeId], references: [id])
     @@index([userId])
+
 }
