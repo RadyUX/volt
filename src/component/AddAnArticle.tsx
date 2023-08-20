@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
 
+
 type AddArticleForm = {
     title: string;
     url: string;
@@ -12,15 +13,23 @@ type AddArticleForm = {
   };
   
 const AddAnArticle = ()=> {
+   
+
+  
+ const router = useRouter()
    const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
-      } = useForm<AddArticleForm>()
+      } = useForm<AddArticleForm>({
+      
+      })
 
-      const onSubmit: SubmitHandler<AddArticleForm> = (data) => console.log(data)
-    return(
+      
+      
+
+      return(
         <>
         
 <Head>
@@ -54,14 +63,10 @@ const AddAnArticle = ()=> {
 </div>
 
 <div className="flex flex-col gap-2">
-    <label htmlFor="theme" className="text-lg font-semibold text-gray-900 dark:text-white">
-        Theme
+    <label htmlFor="collections" className="text-lg font-semibold text-gray-900 dark:text-white">
+       Collection
     </label>
-    <select id="theme" className="block w-full rounded-md border border-gray-300 p-3 text-sm text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400" {...register("theme", { required: true })}>
-        <option value="javascript">JavaScript</option>
-        <option value="typescript">TypeScript</option>
-        <option value="react">React</option>
-    </select>
+  
 </div>
 
 <button type="submit" className="self-start mt-4 px-6 py-3 rounded-md bg-blue-700 text-white font-semibold text-sm hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in duration-200 dark:bg-blue-800 dark:hover:bg-blue-900">

@@ -7,12 +7,3 @@ import type { User } from "@clerk/nextjs/server";
 import type { Article } from "@prisma/client";
 import { api } from "~/utils/api";
 
-export const filterUserForClient = (user: User) => {
-  return {
-    id: user.id,
-    username: user.username,
-    profileImageUrl: user.profileImageUrl,
-    
-  };
-};
-

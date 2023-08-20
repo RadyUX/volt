@@ -13,34 +13,26 @@ datasource db {
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
-
+model User {
+    id          String       @id @default(cuid())
+    collections Collection[]
+}
 
 model Collection {
-    id      String    @id @default(cuid())
-    name    String
-    userId  String    // ID utilisateur de Clerk
-    articles Article[]
+    id      String      @id @default(cuid())
+    name    String      @unique
+    user    User        @relation(fields: [userId], references: [id])
+    userId  String
+    articles Article[] // Fixed the name
 }
-
-model Theme {
-    id       String   @id @default(cuid())
-    name     String
-    articles Article[]
-}
-
 
 model Article {
-      id           String    @id @default(cuid())
-    createdAt    DateTime  @default(now())
+    id           String     @id @default(cuid())
+    createdAt    DateTime   @default(now())
     title        String   
     url          String
-    imageUrl     String?   // URL de l'image
+    imageUrl     String?   // URL of the image
     read         Boolean   @default(false)
-    userId       String    // ID utilisateur de Clerk
-    collectionId String
     collection   Collection @relation(fields: [collectionId], references: [id])
-    themeId      String?
-    theme        Theme?     @relation(fields: [themeId], references: [id])
-    @@index([userId])
-
+    collectionId String
 }

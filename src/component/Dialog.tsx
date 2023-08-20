@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import {useSearchParams} from 'next/navigation'
-import AddAnArticle from "~/component/ArticleForm";
+import AddAnArticle from "~/component/AddAnArticle";
 
 type Props = {
     title: string,
